@@ -1,0 +1,263 @@
+
+.App {
+  margin: 0;
+  padding: 0;
+}
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* #logo{
+  font-size: 1.5rem; /* QUAL UNIDADE EH ESSA ? 
+  font-weight: bold;
+}  App-logo instead */
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+.App-marca {
+  display: flex;
+  height: 80px;
+  padding: 20px;
+  color: black;
+}
+a{
+  color: black;
+  text-decoration: none;  /*SERVE PRA Q ISSO */ 
+  font-family: Arial, Helvetica,sans-serif;
+  font-weight: bold;
+}
+a:hover{
+  background: rgba(0,0,0,.05);  /* 0.05 EH COR OU SOMBRA? */
+}
+
+/* .AppHeader{    
+  display:flex;
+  background-color: #222;
+  text-align: center;
+  justify-content: space-between;
+}   not found    .header  instead */
+.header{
+  box-sizing:border-box; /* pra evitar somar 70px com 1rem, so why padding 1rem?? */
+  height: 80px;
+  padding: 1rem;
+  display:flex;
+  align-items: center; /* alinha ao centro horizontal e vertical? ou so vertical? */
+  justify-content: space-between;
+  background: lightgray;
+}
+
+
+
+
+
+
+.App-intro {
+  font-size: large;
+}
+ 
+/*     NAV.JSX   ----------- */
+
+#menu{
+  display:flex;
+  list-style: none;
+  gap: .5rem;  /* dar espaço entre os objetos  VERIFICAR SE EH COMPATIVEL */
+}
+#menu a{
+  display: block;  /* pra poder definir um padding pra eles */ 
+  padding: .5rem;
+}
+
+/* MENU HAMBURGER MOBILE */
+
+#btn-mobile {
+  display:none;
+}
+
+/* Media query, (condiçao) ex: 600, sempre que a tela for width menor que 600px, 
+essas condiçoes de CSS se aplicam over the others */
+@media(max-width: 500px){
+  
+  #menu{
+      /*display: block;  */ /* colocar cada elemento por linha */
+      /* display: none; */ /* nao deixa a animaçao transition acontecer... */
+      display: block;/* back to it, so the animation happens*/
+      position: absolute; /*por cima de qualquer elemento */
+      width: 100%;   /*posiçao absolute precisa declarar tamanho */
+      top: 70px;/* calcular o tamanho do cabeçalho LOGO pra deixar ele logo abaixo do LOGO header */
+      right: 0; /* pra colar no canto direito */
+      background-color: #e7e7e7;
+      /* height: 100vh;  view port, a tela como esta para o usuario, cria espaço a mais, se a posiçao TOp por exemplo, nao for zero. */
+      /*height: calc(100vh - 70px); /* diminui a diferença pra tornar view port screen standart */
+      /* levar o height pra #nav.active, pra possibilitar animaçao de menu abrindo... */
+      height: 0;
+      transition: .6s;  /* #menu li continua visivel só animaçao muda, ADICIONAR VISIBILITY*/
+      visibility: hidden; /* pra esconder elementos ATÉ chegar animaçao AINDA PRECISA ADD OVERFLOW*/
+      overflow-y: hidden;
+      z-index: 1000; /* maior numero possivel, garante a supremacia por cima de outros zindex menores ou standart  */
+  }
+  #nav.active #menu{    /* TOGGLE on JS file... quando nav.active class tiver criada , muda o estilo do id menu */
+      /* display: block;*/  /* nao precisa mais pq declarei em #menu, for transition to happen  */
+      /* display: flex; */ /* muda pra block pra fazer animaçao   none on #menu e block aqui */
+      height: calc(287px - 70px);  /*from zero(on #menu) to 100vh-70px... colocar transition on #menu */
+      /* transition nao funciona de none(#menu) pra block(#nav.active menu) */
+      visibility: visible; /* #menu */
+      overflow-y: auto; /* caso menu tenha mais itens que a tela suporta, cria barra scroll */
+      box-shadow: #e7e7e7;
+      border-bottom: 7px solid rgba(0,0,0,.05);
+      /*falta limitar animaçao menu pra fim dos elementos #menu */
+  }
+  #menu a{
+      padding: 1rem 0;
+      margin: 0 1rem; /* REFLETIR DIFERENÇA DE BOTAR 1 REM PADDING OU MARGIN  */
+      border-bottom: 2px solid rgba(0,0,0,.05);        
+  }
+  #btn-mobile{
+      display: flex;  /* Muda do display block, pra positionar hamburger to lado  */
+      padding: .5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      gap: .5rem; /* deixar espaço entre menu e linhas */
+  }
+  #hamburger{
+      width: 20px;
+      border-top: 2px solid;
+  }
+  #hamburger::after, #hamburger::before {  /* criar outras linhas sem criar outros <span> in html */
+      content: ''; /* pra poder a linha existir visualmente */
+      display: block; /* pra width e height ser aplicados */
+      width: 20px;
+      height: 2px;   /*similar to border top */ 
+      background: currentColor; /*variavel que pega do #hamburger */
+      margin-top: 5px;
+      transition: .3s;  /* animar a rotation do hamburger.active */
+      position: relative; /*pra ativar o top do hamburger after  */
+  }
+  #nav.active #hamburger{
+      border-top-color: transparent; /* pra mudar as tres barras pra duas */
+  }
+  #nav.active #hamburger::before{
+      transform: rotate(135deg);
+  }
+  #nav.active #hamburger::after{
+      transform: rotate(-135deg);
+      top: -7px;  /* top, so funciona se position: relativo, absoluto ou fixo */
+  }
+}
+
+/* FIM     NAV.JSX   --------  */
+
+
+/* -----------------------------------------------------------
+
+/* ------------------------------------------------------------
+body {
+  height: 100vh;
+  border: 0;
+  margin: 0;
+}
+
+header {
+  box-sizing: border-box;
+  height: 160px;
+  padding: 20px;
+  border-width: 0 0 1px 0;
+  border-color: black;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lightslategray;
+}
+
+.logo {
+  font-size: 40px;
+  font-family: 'Rubik Wet Paint', cursive;
+  letter-spacing: 5px;
+  padding-left: 200px;
+}
+
+/* 
+INICIO DO CODIGO DA IMAGEM LOGO   ------------------------------------------------
+           DIV - ID = CF 
+*/
+/*
+#cf {
+  position:relative;
+  margin: 0 140px 80px 0;
+  cursor: grab;
+}
+
+#cf img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: transparent;
+  border: gray 1px solid;
+
+}
+
+ @keyframes cf3FadeInOut {
+  0% {
+  opacity:1;
+}
+45% {
+opacity:0.6;
+}
+55% {
+opacity:0.4;
+}
+100% {
+opacity:0;
+}
+}
+
+#cf img.top {
+animation-name: cf3FadeInOut;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 1s;
+animation-direction: alternate;
+}
+
+/*   
+FINAL DO CODIGO DA IMAGEM LOGO ----------------------------------------------------
+*/
+
+
+ /*
+.card-list {
+  box-sizing: border-box;
+  min-height: calc(100% - 180px);
+  text-align: center;
+  padding: 20px; 
+}
+
+.card {
+  width: 26%;
+  margin: 3%;
+  border: 1px solid black;
+  display: inline-block;
+  height: 150px;
+  text-align: center;
+}
+
+#footer {
+  box-sizing: border-box;
+  height: 100px;
+  text-align: center;
+  border-width: 1px 0 0 0;
+  border-color: black;
+  border-style: solid;
+  padding: 10px;
+  width: 100%;
+  bottom: 0px;
+  background-color: white;
+}
+*/

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title> EYE </title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Space+Mono&display=swap" rel="stylesheet" /> 
+    <!-- <link href="./web1.css" rel="stylesheet" type="text/css" /> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tag above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start`.
+      To create a production bundle, use `npm run build`.
+    -->
+  </body>
+  </html>
+
+  <script>
+    const btnMobile = document.getElementById('btn-mobile');
+ // cria funçao pra selecionar o botao MENU 
+
+function toggleMenu(){
+// funçao pra o evento que ativa a const do MENU
+    if(event.type === 'touchstart') event.preventDefault(); 
+    // resolve o double click do 'touchstart'
+    const nav = document.getElementById('nav'); 
+    // selecionar o nav do html
+    nav.classList.toggle('active');         
+    // adiciona class ao nav   // vs .add .remove 
+    //OR toggle= adiciona se nao tem, remove se tem
+}   
+
+btnMobile.addEventListener('click', toggleMenu); 
+// evento que ativa o botao MENU click
+
+// no mobile esse evento click(addEventListener('click', toggleMenu)
+        // emula o evento de touch, mas demora 300ms 
+btnMobile.addEventListener('touchstart', toggleMenu); 
+// touchstart cria standad click event after touch event
+        // menu abriria e fecharia porque evento se repetem..... 
+        // criar IF in toggleMenu()
+  </script>
